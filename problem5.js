@@ -3,21 +3,30 @@ function  resultReport( marks ) {
     if(marks.length === 0){
         return { finalScore: 0 , pass: 0, fail: 0 };
     }
-
-    if(marks  !== 'array'){
-    return "Invalid";
+    else if(!Array.isArray(marks)){
+        return "Invalid";
     }
     
-    for(let mark of marks){
-        avg = (mark / mark.length) * mark.length;
-        if(mark <= 30){
-            return "fail";
-        }
-        else{
-            return "pass";
+    let pass = 0;
+    let fail = 0;
+    let sum = 0;
+
+    for (let mark of marks) {
+        sum = sum + mark;
+        if (mark >= 50) {
+            pass++;
+        } 
+        else {
+            fail++;
         }
     }
+    
+    let finalScore = Math.round(sum / marks.length);
+
+    return { finalScore, pass, fail };
 }
 
 let studentMark = resultReport([99, 87, 67, 12 ,87]);
 console.log(studentMark);
+
+
